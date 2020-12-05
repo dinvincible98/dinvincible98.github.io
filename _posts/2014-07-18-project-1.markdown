@@ -4,9 +4,9 @@ subtitle: Dynamics|Simulation
 subtitle: Simulation of a dice bouncing in an moving box 
 layout: default
 modal-id: 1
-date: 2020-12-08
-img: dreams.png
-thumbnail: dreams-thumbnail.png
+date: 2020-12-03
+img: Dice.gif
+thumbnail: Dice.gif
 alt: image-alt
 project-date: April 2014
 client: Start Bootstrap

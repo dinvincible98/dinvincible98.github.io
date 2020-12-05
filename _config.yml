@@ -1,10 +1,10 @@
-url: https://dinvincible98.github.io
-baseurl: /agency-jekyll-theme/
+url: "https://dinvincible98.github.io"
+baseurl: ""
 
 # Site settings
-title: Mingqing Yuan
+title: Mingqing Yuan Portfolio
 email: mingqingyuan2021@u.northwestern.edu
-description: "Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description."
+description: My Portfolio page
 
 
 # Team names, titles and social links
