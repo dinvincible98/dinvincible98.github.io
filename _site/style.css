@@ -277,7 +277,7 @@ header {
     text-align: center;
     color: #fff;
     background-attachment: scroll;
-    background-image: url('/agency-jekyll-theme//img/1.jpeg');
+    background-image: url('/img/1.jpeg');
     background-position: center center;
     background-repeat: none;
     -webkit-background-size: cover;
@@ -666,7 +666,7 @@ aside.clients img {
 
 section#contact {
     background-color: #222;
-    background-image: url('/agency-jekyll-theme//img/map-image.png');
+    background-image: url('/img/map-image.png');
     background-position: center;
     background-repeat: no-repeat;
 }

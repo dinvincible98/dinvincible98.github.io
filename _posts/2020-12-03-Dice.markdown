@@ -1,0 +1,15 @@
+---
+title: Dice In The Box
+subtitle: Dynamics|Simulation 
+subtext: Modeling a dice experiences several impacts in a moving box
+layout: default
+modal-id: 1
+date: 2020-12-03
+img: Dice.gif
+thumbnail: Dice.gif
+alt: image-alt
+project-date: December 2020
+client: Start Bootstrap
+category: Web Development
+description: Lorem ipsum dolor sit amet, usu cu alterum nominavi lobortis. At duo novum diceret. Tantas apeirian vix et, usu sanctus postulant inciderint ut, populo diceret necessitatibus in vim. Cu eum dicam feugiat noluisse.
+---

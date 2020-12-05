@@ -1,14 +1,14 @@
 ---
-title: Dice In The Box
-subtitle: Dynamics|Simulation 
-subtitle: Simulation of a dice bouncing in an moving box 
+title: Scott-s-bot-for-tots
+subtitle: ROS|CV|Motion Control
+subtext: Baxter robot recognizes bottles and cans and categorizes them into differnt bins
 layout: default
-modal-id: 1
-date: 2020-12-03
-img: Dice.gif
-thumbnail: Dice.gif
+modal-id: 3
+date: 2020-11-28
+img: Baxter_sorting.gif
+thumbnail: Baxter_sorting.gif
 alt: image-alt
-project-date: April 2014
+project-date: December 2014
 client: Start Bootstrap
 category: Web Development
 description: Lorem ipsum dolor sit amet, usu cu alterum nominavi lobortis. At duo novum diceret. Tantas apeirian vix et, usu sanctus postulant inciderint ut, populo diceret necessitatibus in vim. Cu eum dicam feugiat noluisse.
