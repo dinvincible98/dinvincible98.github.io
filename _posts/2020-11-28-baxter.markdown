@@ -8,7 +8,7 @@ date: 2020-11-28
 img: Baxter_sorting.gif
 thumbnail: Baxter_sorting.gif
 alt: image-alt
-video: https://drive.google.com/file/d/1X9_SqthASQSvZNoSyFvCm9rFHsV22p0W/preview
+video: https://www.youtube.com/embed/YJmehmPcRiY
 project-date: December 2020
 Baxter: Source Code
 category: Web Development
