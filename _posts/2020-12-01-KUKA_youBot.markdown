@@ -8,6 +8,7 @@ date: 2020-12-03
 img: best.gif
 thumbnail: best.gif
 alt: image-alt
+video: https://drive.google.com/file/d/13itwKjxzgMyJ9AdS5io6jW1Ubr3soTDl/preview
 project-date: December 2020
 KUKA: Source Code
 category: Web Development

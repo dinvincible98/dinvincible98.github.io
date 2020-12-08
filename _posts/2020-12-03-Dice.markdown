@@ -8,8 +8,9 @@ date: 2020-12-03
 img: Dice.gif
 thumbnail: Dice.gif
 alt: image-alt
+video: https://drive.google.com/file/d/1ccb1oXF31gKpZWhajECvnmWGRqMsrmfs/preview
 project-date: December 2020
-client: Start Bootstrap
+Dice: Source code
 category: Web Development
 description: Lorem ipsum dolor sit amet, usu cu alterum nominavi lobortis. At duo novum diceret. Tantas apeirian vix et, usu sanctus postulant inciderint ut, populo diceret necessitatibus in vim. Cu eum dicam feugiat noluisse.
 ---
