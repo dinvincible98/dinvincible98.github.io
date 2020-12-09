@@ -1,7 +1,7 @@
 ---
 title: KUKA youBot manipulation
 subtitle: Feedback Control|Motion planning
-subtext: Writing a program that let KUKA youBot finishes a pick and place task in V-rep simulation scene
+subtext: KUKA youBot finishes a pick and place task in V-rep simulation scene
 layout: default
 modal-id: 2
 date: 2020-12-03
