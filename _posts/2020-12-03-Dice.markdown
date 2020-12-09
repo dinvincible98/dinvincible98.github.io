@@ -1,7 +1,7 @@
 ---
 title: Dice In The Box
 subtitle: Dynamics|Simulation 
-subtext: Modeling a dice experiences several impacts in a moving box
+subtext: Modeling of a dice experiences several impacts in a moving box
 layout: default
 modal-id: 1
 date: 2020-12-03
