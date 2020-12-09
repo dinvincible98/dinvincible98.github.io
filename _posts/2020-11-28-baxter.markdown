@@ -1,7 +1,7 @@
 ---
 title: Scott-s-bot-for-tots
 subtitle: ROS|CV|Motion Control
-subtext: Baxter robot recognizes bottles and cans and categorizes them into differnt bins
+subtext: Baxter robot recognizes bottles and cans and categorizes them into different bins
 layout: default
 modal-id: 3
 date: 2020-11-28
