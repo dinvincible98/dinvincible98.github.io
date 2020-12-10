@@ -1,13 +1,14 @@
 ---
-title: 
-subtitle: Website Design
+title: RRT challenge
+subtitle: RRT|Algorithm|Motion planning
 layout: default
-modal-id: 2
-date: 2014-07-17
+modal-id: 4
+date: 2020-09-15
 img: 
 thumbnail: 
 alt: image-alt
-project-date: April 2014
+video: 
+project-date: Sep 2020
 client: Start Bootstrap
 category: Web Development
 description: Lorem ipsum dolor sit amet, usu cu alterum nominavi lobortis. At duo novum diceret. Tantas apeirian vix et, usu sanctus postulant inciderint ut, populo diceret necessitatibus in vim. Cu eum dicam feugiat noluisse.
