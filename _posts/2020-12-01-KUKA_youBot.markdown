@@ -10,7 +10,6 @@ thumbnail: best.gif
 alt: image-alt
 video: https://www.youtube.com/embed/bPBQET7Chcs
 project-date: December 2020
-skills: Feedback control, Inverse Kinematics, V-Rep, Omnidirection Robot control
 KUKA: Source Code
 category: Web Development
 intro: Brief Description

@@ -4,13 +4,16 @@ subtitle: RRT|Algorithm|Motion planning
 layout: default
 modal-id: 4
 date: 2020-09-15
-img: 
-thumbnail: 
+img: NU_RRT.gif
+thumbnail: NU_RRT.gif
 alt: image-alt
-video: 
+video: https://www.youtube.com/embed/p3kx4iesyHA
 project-date: Sep 2020
-client: Start Bootstrap
+RRT: Source Code
 category: Web Development
-description: Lorem ipsum dolor sit amet, usu cu alterum nominavi lobortis. At duo novum diceret. Tantas apeirian vix et, usu sanctus postulant inciderint ut, populo diceret necessitatibus in vim. Cu eum dicam feugiat noluisse.
+intro: Brief Description
+description: This is a RRT challenge in MSR Hackathon at Northwestern University. Rapidly-Exploring Random Tree (RRT) is a fundamental path planning algorithm in robotics. It consists of a set of vertices, which represent configurations in some domain D and edges, which connect two vertices. The algorithm randomly builds a tree in such a way that, as the number of vertices n increases to inifinity, the vertices are uniformly distributed across the domain D in R^n space.<br> For more information, please visit my github page below.
+sub: 
+description2: 
 
 ---
