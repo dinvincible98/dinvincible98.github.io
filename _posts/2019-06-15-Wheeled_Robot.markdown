@@ -12,7 +12,7 @@ project-date: June 2019
 Wheel: Source Code
 category: Web Development
 intro: Brief Description
-description:  This is the final project for the course MAE106 mechanical system labratory and the task is to design a wheel robot and participate a robot contest.
+description:  This is the final project for the course MAE106 mechanical system labratory at UC Irvine and the task is to design a wheel robot and participate a robot contest.
 sub: Mechanical Design
 description2: Our mechanical design goals were to build a robot that was stable, efficient and has a low fraction. To achieve stability, we wanted to make sure the error is small, so we employed the CNC router to cut pur wood plates. For wood selection, we chose plywood instead of the one given by school because it is lighter, smoother and has a better structure for CNC cutting. Besides, we cut two polycarbonate plates for the installation of power transmission. Moreover, we expected collision with other robots, so we tried to lower the center of mass of our robot by reducing the length of vertical plates.
 sub2: Software design
