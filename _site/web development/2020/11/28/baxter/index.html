@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Scott-s-bot-for-tots</title>
+    <title>Baxter Sorter</title>
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="My Portfolio page">
     <link rel="canonical" href="http://localhost:4000/web%20development/2020/11/28/baxter/">
@@ -109,6 +109,38 @@
             <div class="row">
             
                 <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a href="#portfolioModal7" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="img/portfolio/real.gif" class="img-responsive img-centered" alt="">
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>Autonomous Jackal Explorer</h4>
+                        <p class="text-muted">SLAM|Froniter Exploration|Computer Vision|Pointcloud</p>
+                        <p class="text-muted">Developed an autonomous Jackal robot equipped with perception, localization, mapping and navigation abilities</p>
+                    </div>
+                </div>
+            
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a href="#portfolioModal8" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="img/portfolio/jackal.jpg" class="img-responsive img-centered" alt="">
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>Jackal ROS Noetic Bringup</h4>
+                        <p class="text-muted">Network Configuration|ROS|Debugging</p>
+                        <p class="text-muted"></p>
+                    </div>
+                </div>
+            
+                <div class="col-md-4 col-sm-6 portfolio-item">
                     <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
                         <div class="portfolio-hover">
                             <div class="portfolio-hover-content">
@@ -150,7 +182,7 @@
                         <img src="img/portfolio/Baxter_sorting.gif" class="img-responsive img-centered" alt="">
                     </a>
                     <div class="portfolio-caption">
-                        <h4>Scott-s-bot-for-tots</h4>
+                        <h4>Baxter Sorter</h4>
                         <p class="text-muted">ROS|CV|Motion Control</p>
                         <p class="text-muted">Baxter robot recognizes bottles and cans and categorizes them into different bins</p>
                     </div>
@@ -318,6 +350,186 @@
 
      <!-- Portfolio Modals -->
  
+    <div class="portfolio-modal modal fade" id="portfolioModal7" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>Autonomous Jackal Explorer</h2>
+                            <hr class="star-primary">
+                           <iframe width="700" height="450" src="https://www.youtube.com/embed/shDFnn4GH-g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <h3>Brief Description</h3>
+                            <p style="font-size:18px;">This is my individual winter project at Northwestern University. The goal of the project is to build a mobile robotic system equipped with perception, localization, mapping and navigation abilities in both simulation and real world. The robot is capable of exploring an unknown environment autonomously and mapping the world. It can also detect pedestrians and classify different objects with lidar and camera. Based on the changing the environment, the robot should give responses accordingly.</p>
+                            <h3>Hardware Dependencies</h3>
+                            <p style="font-size:18px;">Clearpath Jackal Robot, Velodyne-16 Lidar, Intel Realsense Camera D435i</p>
+                            <h3>Software Dependencies</h3>
+                            <p style="font-size:18px;">Gazebo, Slam Toolbox, Costmap2D, hdl people tracking, NumPy, OpenCV(4.5.1), YOLOv4-tiny</p>
+                            <h3>Project Breakdown</h3>
+                            <p style="font-size:18px;">1.SLAM(Simultaneous Localization and Mapping)<br>2.Frontier Exploration<br>3. People Tracking<br>4.Real-time Object Detecion</p>
+                            <h3>Part 1. SLAM</h3>
+                            <p style="font-size:18px;">SLAM(Simultaneous Localization and Mapping) technology allows the robot to map an unknown environment while keeps tracking its own location. I used slam toolbox package to accomplish the task.Below is a SLAM flowchart for Jackal.</p>
+                            <ul class="list-inline item-details">
+                            <img src="https://user-images.githubusercontent.com/70287453/111082277-67d75d80-84d5-11eb-9138-d69e5b4e340e.png" />
+                            <h3></h3>
+                            <p style="font-size:24px;">Demo</p>
+                            <ul class="list-inline item-details">
+                            <img src="https://user-images.githubusercontent.com/70287453/111059530-f3140d00-845b-11eb-8aa3-7b2310e49384.gif" />                    
+                            <h3>Part 2. Frontier Exploration</h3>
+                            <p style="font-size:18px;">Frontier exploration is a fast and advanced algorithm for robot to explore in an unknown environment and map the world. This algorithm finds every existed frontiers and robot will move to the closest frontier based on its distance to the centroid of frontier. A detailed explaination for my implementation of the algorithm can be found at my github page below.</p>
+                            <ul class="list-inline item-details">                                
+                            <h3></h3>
+                            <p style="font-size:24px;">Demo</p>
+                            <ul class="list-inline item-details">
+                            <img src="https://user-images.githubusercontent.com/70287453/111059806-e8f30e00-845d-11eb-8db0-c0366c25a32b.gif" />                                    
+                            <h3></h3>
+                            <p style="font-size:18px;">As shown in the demo, robot will move to the centroid of the closest frontier and constantly updating the map. All found frontiers are represented in blue; If the robot dose not move to the target point in a time limit, then the frontier will turn red and robot will move to the next frontier point.</p>
+                            <ul class="list-inline item-details">                                
+                            <h3>Part 3. People Tracking</h3>
+                            <p style="font-size:18px;">For people tracking feature, I used hdl_people tracking package which can detect walking pedestrains by extracting information from the pointcloud data then displayed as markerarray in Rviz.</p>
+                            <ul class="list-inline item-details">                                   
+                            <h3></h3>
+                            <p style="font-size:24px;">Demo</p>
+                            <ul class="list-inline item-details"> 
+                            <img src="https://user-images.githubusercontent.com/70287453/111059814-eee8ef00-845d-11eb-96fa-cdfd59554b52.gif" />  
+                            <h3>Part 4. Real-time Object Detection</h3>
+                            <p style="font-size:18px;">This part of the project is also my final project for COMP_ENG 395:Connected and Autonomous Vehicles:Challenges and Design which I thorougly explained how I implemented YOLO using OpenCV and evaluated the performance of YOLOv3, YOLOv4 and YOLOv4-tiny models then tested on the Jackal. Based on my test result, I found YOLOv4-tiny can reach approximately 30FPS in ROS whereas the other two models only have 3FPS. Even though YOLOv4-tiny has less accuracy compared with the other two models, it is still good enough to classify most objects. Besides, FPS is extreamly important in real time detection for autonomous vehicle so I decided to use YOLOv4-tiny on Jackal. My full analysis paper can be found at my github page below.</p>
+                            <ul class="list-inline item-details">
+                            <h3></h3>
+                            <p style="font-size:24px;">Demo</p>
+                            <ul class="list-inline item-details"> 
+                            <img src="https://user-images.githubusercontent.com/70287453/111059811-eb556800-845d-11eb-906a-2048baa3e898.gif" />  
+                            <h3>Future Work</h3>
+                            <p style="font-size:18px;">1. Add a boundary feature to the automapping so I can specify an area for the robot to explore instead of trying to map the whole environment(Not realistic if given a very large environment).<br>2. Implement lidar - camera fusion so the detected objects can be shown in the map and use GPU for handling object detection task.<br>3. Estimate the distance between the camera and objects using the depth information from the realsense camera.</p>
+                            <ul class="list-inline item-details">                               
+                                <li>Github page:
+                                	
+                                	<strong><a href=https://github.com/dinvincible98/ME314-Final-Project></a>
+                                    </strong>                                
+                                    <strong><a href=https://github.com/dinvincible98/ME449-Robot-Manipulation></a>
+                                    </strong>
+                                    <strong><a href=https://github.com/dinvincible98/ME495-final-project></a>
+                                    </strong>
+                                </li>
+                                	<strong><a href=https://github.com/dinvincible98/Hackathon-RRT></a>
+                                    </strong>
+                                    <strong><a href=https://github.com/dinvincible98/MAE172-Card-shuffler></a>
+                                    </strong>
+                                    <strong><a href=https://github.com/dinvincible98/MAE106></a>
+                                    </strong>
+                                    </strong><a href=https://github.com/dinvincible98/Autonomous_Jackal_Explorer>Source Code</a>
+                                    </strong>
+                                    </strong><a href=https://github.com/dinvincible98/Jackal_ROS_Noetic_Bringup></a>
+                                    </strong>
+                                <li>Date:
+                                    <strong>March 2021
+                                    </strong>
+                                </li>
+                            </ul>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="portfolio-modal modal fade" id="portfolioModal8" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>Jackal ROS Noetic Bringup</h2>
+                            <hr class="star-primary">
+                           <iframe width="700" height="450" src="https://www.youtube.com/embed/BzSmWLWmOxg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <h3>Brief Description</h3>
+                            <p style="font-size:18px;">This is the final project for the course MAE106 mechanical system labratory at UC Irvine and the task is to design a wheel robot and participate a robot contest.</p>
+                            <h3>Mechanical Design</h3>
+                            <p style="font-size:18px;">Our mechanical design goals were to build a robot that was stable, efficient and has a low fraction. To achieve stability, we wanted to make sure the error is small, so we employed the CNC router to cut pur wood plates. For wood selection, we chose plywood instead of the one given by school because it is lighter, smoother and has a better structure for CNC cutting. Besides, we cut two polycarbonate plates for the installation of power transmission. Moreover, we expected collision with other robots, so we tried to lower the center of mass of our robot by reducing the length of vertical plates.</p>
+                            <h3>Software design</h3>
+                            <p style="font-size:18px;">For software design, we first want an accurate heading reading. We had heard that the magnetometer would be interfered by many factors, since the magnetic field of the earth is quite weak compared to the magnets, solenoids, and other electronics, so we decided to also add a gyroscope to eliminate sudden, and incorrect directionschange. We bought a LSM9DS1 chip — a 9DOF IMU with a magnetometer, an accelerometer and a gyro. To code this chip, we modified the existing library for this Adafruit LSM9DS1, so the heading is calculated within the library functions. Calibrations were added into the sensor reading functions, along with a simple low pass filter. The magnetometer read just fine, but the gyro, after integration, always have a random shift, the accelerometer after two integrations only got worse. We then tried comparing heading readings both from the magnetometer and the gyro using a Madgwick filter, the shift is kind of eliminated. Initially, it still has a low frequency noise that puts a plus or minus 10 degrees, but after adjusting the low pass filter of the magnetometer and gyro readings, the noise is much smaller.<br>For more detailed information, please view my github page below.</p>
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">
+                            <img src="" />
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details">
+                            <img src="" />                    
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">                                
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details">
+                            <img src="" />                                    
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">                                
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">                                   
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details"> 
+                            <img src="" />  
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details"> 
+                            <img src="" />  
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">                               
+                                <li>Github page:
+                                	
+                                	<strong><a href=https://github.com/dinvincible98/ME314-Final-Project></a>
+                                    </strong>                                
+                                    <strong><a href=https://github.com/dinvincible98/ME449-Robot-Manipulation></a>
+                                    </strong>
+                                    <strong><a href=https://github.com/dinvincible98/ME495-final-project></a>
+                                    </strong>
+                                </li>
+                                	<strong><a href=https://github.com/dinvincible98/Hackathon-RRT></a>
+                                    </strong>
+                                    <strong><a href=https://github.com/dinvincible98/MAE172-Card-shuffler></a>
+                                    </strong>
+                                    <strong><a href=https://github.com/dinvincible98/MAE106></a>
+                                    </strong>
+                                    </strong><a href=https://github.com/dinvincible98/Autonomous_Jackal_Explorer></a>
+                                    </strong>
+                                    </strong><a href=https://github.com/dinvincible98/Jackal_ROS_Noetic_Bringup>Source Code</a>
+                                    </strong>
+                                <li>Date:
+                                    <strong>Feburary 2021
+                                    </strong>
+                                </li>
+                            </ul>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
             <div class="close-modal" data-dismiss="modal">
@@ -339,7 +551,43 @@
                             <p style="font-size:18px;">In this project, the system contains two bodies:A dice and a box.The dice has a length of 1, mass of 1 and box has a length of 6, mass of 6.Both bodies have rotational inertia equals 1(Assuming the center of the mass is the center of the geometry).The dice has a configuration(x_dice, y_dice, theta_dice) and the box has a configuration(x_box, y_box, theta_box).The system involves 3 frames:world_frame, box_frame and dice_frame.And there are two external forces apply to the box in x and y direction which cause the box to move along a trajectory.The dice falls from the center of the box and should experience several impacts with the box.Also, the dice is contrainted to the inner area of the box and the moving trajectory of the box should not affect by the dice.</p>
                             <h3>Technical Outline</h3>
                             <p style="font-size:18px;">1. Draw a diagram to show the transformation of frame.<br>2. Calculate all the transformation of frame.<br>3. Calculate Lagrangian, Eular-Lagrange equations with the existence of external forces and constraints.<br>4. Wirte function for updating impact equations<br>5. Modify simulation function and run simulation<br>6. Plot the trajectory of dice/box versus time.<br>For more detailed information and explanation, please visit my github page below.</p>
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
                             <ul class="list-inline item-details">
+                            <img src="" />
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details">
+                            <img src="" />                    
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">                                
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details">
+                            <img src="" />                                    
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">                                
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">                                   
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details"> 
+                            <img src="" />  
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details"> 
+                            <img src="" />  
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">                               
                                 <li>Github page:
                                 	
                                 	<strong><a href=https://github.com/dinvincible98/ME314-Final-Project>Source code</a>
@@ -354,6 +602,10 @@
                                     <strong><a href=https://github.com/dinvincible98/MAE172-Card-shuffler></a>
                                     </strong>
                                     <strong><a href=https://github.com/dinvincible98/MAE106></a>
+                                    </strong>
+                                    </strong><a href=https://github.com/dinvincible98/Autonomous_Jackal_Explorer></a>
+                                    </strong>
+                                    </strong><a href=https://github.com/dinvincible98/Jackal_ROS_Noetic_Bringup></a>
                                     </strong>
                                 <li>Date:
                                     <strong>December 2020
@@ -389,7 +641,43 @@
                             <p style="font-size:18px;">1. Plan a trajectory as desired trajectory for the end-effector to follow <br>2. Use the previous desired trajectory in feedfoward+PI to calculate the kinematics of the youBot<br>3. Use the calculated kinematics to drive the youBot <br>4. Save the result as a .csv file and conduct simulation in V-rep scene 6.</p>
                             <h3>Strategy for completing tasks</h3>
                             <p style="font-size:18px;">There are three tasks and I need to choose a controller and find the best configuration setup.<br>For task 'Best', the main goal is to minimize the end effector error so I choose to use Feedfoward + PI controller. With KP = 20, KI = 0.5, this controller presents a very good result that the end effector error becomes very small as time goes by and the KUKA youBot finishes the task smoothly and accurately in the simulation.<br>For task 'Overshoot', I need to find an end effector error with large overshoot value. With KP = 2, KI = 0.001, there is a overshoot between 9 - 14s.<br>For task 'NewTask', I can customized a target location for the robot to go and I used the same strategy as the task 'Best'. With KP = 20, KI = 0.1, the end effector error is very small and the robot finishes the task very well in the simulation.<br>For more detailed information, please visit my github page below.</p>
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
                             <ul class="list-inline item-details">
+                            <img src="" />
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details">
+                            <img src="" />                    
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">                                
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details">
+                            <img src="" />                                    
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">                                
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">                                   
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details"> 
+                            <img src="" />  
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details"> 
+                            <img src="" />  
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">                               
                                 <li>Github page:
                                 	
                                 	<strong><a href=https://github.com/dinvincible98/ME314-Final-Project></a>
@@ -404,6 +692,10 @@
                                     <strong><a href=https://github.com/dinvincible98/MAE172-Card-shuffler></a>
                                     </strong>
                                     <strong><a href=https://github.com/dinvincible98/MAE106></a>
+                                    </strong>
+                                    </strong><a href=https://github.com/dinvincible98/Autonomous_Jackal_Explorer></a>
+                                    </strong>
+                                    </strong><a href=https://github.com/dinvincible98/Jackal_ROS_Noetic_Bringup></a>
                                     </strong>
                                 <li>Date:
                                     <strong>December 2020
@@ -430,7 +722,7 @@
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="modal-body">
-                            <h2>Scott-s-bot-for-tots</h2>
+                            <h2>Baxter Sorter</h2>
                             <hr class="star-primary">
                            <iframe width="700" height="450" src="https://www.youtube.com/embed/YJmehmPcRiY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             <h3>Brief Description</h3>
@@ -439,7 +731,43 @@
                             <p style="font-size:18px;">Computer Vision:We use the realsense depth camera to capture image and use openCV to detect and classify the objects in the image.After the classification process,the programs saves the location and classification information which will be used in manipulation part.<br>Manipulation:We use MoveIt! to control the motion of Baxter. After getting the location and classification information from CV, we call a customized service to return those information as list so Baxter can follow the planned trajectory.</p>
                             <h3>General Procedures of motion</h3>
                             <p style="font-size:18px;">1. Move to the home position where the robot is safely above all objects.<br>2. For the current item in the list, display either the can image or the bottle image, depending on the classification.<br>3. Next, move to the object's (x,y) corrdinate at a safe z height away. This is the same height for bottles and cans.<br>4. Then move down to the appropriate perch height, depending on classification. (For example, the robot arm will be position further away from the table for bottle, since those are taller than cans).<br>5. Once safely at the perch height, move down so that the object is in between the grippers.<br> 6.Grasp the object.<br> 7.Move back up to the "safe" position as step 3.<br>8. Move back to the home position. This step was added to ensure predictable behavior of the robot arm.<br>9. Depending on the object's classification, move to the appropriate bin. Also, display the recylcing image.<br>10. Once over the bin, open the grippers and drop the object. Show that the object has been recycled with the bin image.<br>11. Repeat for all objects found.<br>For more detailed infomation, please visit my github page.</p>
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
                             <ul class="list-inline item-details">
+                            <img src="" />
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details">
+                            <img src="" />                    
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">                                
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details">
+                            <img src="" />                                    
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">                                
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">                                   
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details"> 
+                            <img src="" />  
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details"> 
+                            <img src="" />  
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">                               
                                 <li>Github page:
                                 	
                                 	<strong><a href=https://github.com/dinvincible98/ME314-Final-Project></a>
@@ -454,6 +782,10 @@
                                     <strong><a href=https://github.com/dinvincible98/MAE172-Card-shuffler></a>
                                     </strong>
                                     <strong><a href=https://github.com/dinvincible98/MAE106></a>
+                                    </strong>
+                                    </strong><a href=https://github.com/dinvincible98/Autonomous_Jackal_Explorer></a>
+                                    </strong>
+                                    </strong><a href=https://github.com/dinvincible98/Jackal_ROS_Noetic_Bringup></a>
                                     </strong>
                                 <li>Date:
                                     <strong>December 2020
@@ -489,7 +821,43 @@
                             <p style="font-size:18px;"></p>
                             <h3></h3>
                             <p style="font-size:18px;"></p>
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
                             <ul class="list-inline item-details">
+                            <img src="" />
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details">
+                            <img src="" />                    
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">                                
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details">
+                            <img src="" />                                    
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">                                
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">                                   
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details"> 
+                            <img src="" />  
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details"> 
+                            <img src="" />  
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">                               
                                 <li>Github page:
                                 	
                                 	<strong><a href=https://github.com/dinvincible98/ME314-Final-Project></a>
@@ -504,6 +872,10 @@
                                     <strong><a href=https://github.com/dinvincible98/MAE172-Card-shuffler></a>
                                     </strong>
                                     <strong><a href=https://github.com/dinvincible98/MAE106></a>
+                                    </strong>
+                                    </strong><a href=https://github.com/dinvincible98/Autonomous_Jackal_Explorer></a>
+                                    </strong>
+                                    </strong><a href=https://github.com/dinvincible98/Jackal_ROS_Noetic_Bringup></a>
                                     </strong>
                                 <li>Date:
                                     <strong>Sep 2020
@@ -539,7 +911,43 @@
                             <p style="font-size:18px;">1.Many games need card shuffling are popular<br>2.Cards shuffled by hand are easy to be curved<br>3.No product with acceptable price for family market<br>4.Card dealing by hand takes a lot of time and makes errors.</p>
                             <h3>Design description</h3>
                             <p style="font-size:18px;">The mechanism of this design is very straightforward. In the beginning, the user turns on the machine then the rack and pinion elevator will lift the poker case approximately 55mm up. Next, the user put one deck of poker into the case. While IR sensors detect cards, two rollers connected to motors on the poker case begin to roll in opposite directions until after the IR sensor detects there are no cards in the poker case continuously 12 times. After distributing cards onto the left and right platform, the elevator goes down and motors beneath two platforms start working and drive cards back to the poker case. When all cards are dispensed back to the poker case, the elevator rises to the highest point and shakes 0.5 seconds to the cards to make them into a deck so the user can easily remove cards. When all cards are removed and IR sensors detect nothing, the elevator goes down to the original position. One complete shuffling process takes approximately 50 seconds. Moreover, we have a switch for the purple LED lights, which can make the shuffler look cool at night and users can play cards in the dark.<br> For more detailed explanation, please view my github page below.</p>
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
                             <ul class="list-inline item-details">
+                            <img src="" />
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details">
+                            <img src="" />                    
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">                                
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details">
+                            <img src="" />                                    
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">                                
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">                                   
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details"> 
+                            <img src="" />  
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details"> 
+                            <img src="" />  
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">                               
                                 <li>Github page:
                                 	
                                 	<strong><a href=https://github.com/dinvincible98/ME314-Final-Project></a>
@@ -554,6 +962,10 @@
                                     <strong><a href=https://github.com/dinvincible98/MAE172-Card-shuffler>Source Code</a>
                                     </strong>
                                     <strong><a href=https://github.com/dinvincible98/MAE106></a>
+                                    </strong>
+                                    </strong><a href=https://github.com/dinvincible98/Autonomous_Jackal_Explorer></a>
+                                    </strong>
+                                    </strong><a href=https://github.com/dinvincible98/Jackal_ROS_Noetic_Bringup></a>
                                     </strong>
                                 <li>Date:
                                     <strong>Mar 2020
@@ -584,12 +996,48 @@
                             <hr class="star-primary">
                            <iframe width="700" height="450" src="https://www.youtube.com/embed/BzSmWLWmOxg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             <h3>Brief Description</h3>
-                            <p style="font-size:18px;">This is the final project for the course MAE106 mechanical system labratory and the task is to design a wheel robot and participate a robot contest.</p>
+                            <p style="font-size:18px;">This is the final project for the course MAE106 mechanical system labratory at UC Irvine and the task is to design a wheel robot and participate a robot contest.</p>
                             <h3>Mechanical Design</h3>
                             <p style="font-size:18px;">Our mechanical design goals were to build a robot that was stable, efficient and has a low fraction. To achieve stability, we wanted to make sure the error is small, so we employed the CNC router to cut pur wood plates. For wood selection, we chose plywood instead of the one given by school because it is lighter, smoother and has a better structure for CNC cutting. Besides, we cut two polycarbonate plates for the installation of power transmission. Moreover, we expected collision with other robots, so we tried to lower the center of mass of our robot by reducing the length of vertical plates.</p>
                             <h3>Software design</h3>
                             <p style="font-size:18px;">For software design, we first want an accurate heading reading. We had heard that the magnetometer would be interfered by many factors, since the magnetic field of the earth is quite weak compared to the magnets, solenoids, and other electronics, so we decided to also add a gyroscope to eliminate sudden, and incorrect directionschange. We bought a LSM9DS1 chip — a 9DOF IMU with a magnetometer, an accelerometer and a gyro. To code this chip, we modified the existing library for this Adafruit LSM9DS1, so the heading is calculated within the library functions. Calibrations were added into the sensor reading functions, along with a simple low pass filter. The magnetometer read just fine, but the gyro, after integration, always have a random shift, the accelerometer after two integrations only got worse. We then tried comparing heading readings both from the magnetometer and the gyro using a Madgwick filter, the shift is kind of eliminated. Initially, it still has a low frequency noise that puts a plus or minus 10 degrees, but after adjusting the low pass filter of the magnetometer and gyro readings, the noise is much smaller.<br>For more detailed information, please view my github page below.</p>
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
                             <ul class="list-inline item-details">
+                            <img src="" />
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details">
+                            <img src="" />                    
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">                                
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details">
+                            <img src="" />                                    
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">                                
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">                                   
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details"> 
+                            <img src="" />  
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details"> 
+                            <img src="" />  
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">                               
                                 <li>Github page:
                                 	
                                 	<strong><a href=https://github.com/dinvincible98/ME314-Final-Project></a>
@@ -604,6 +1052,10 @@
                                     <strong><a href=https://github.com/dinvincible98/MAE172-Card-shuffler></a>
                                     </strong>
                                     <strong><a href=https://github.com/dinvincible98/MAE106>Source Code</a>
+                                    </strong>
+                                    </strong><a href=https://github.com/dinvincible98/Autonomous_Jackal_Explorer></a>
+                                    </strong>
+                                    </strong><a href=https://github.com/dinvincible98/Jackal_ROS_Noetic_Bringup></a>
                                     </strong>
                                 <li>Date:
                                     <strong>June 2019

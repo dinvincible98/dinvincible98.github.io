@@ -1,5 +1,5 @@
 ---
-title: Scott-s-bot-for-tots
+title: Baxter Sorter
 subtitle: ROS|CV|Motion Control
 subtext: Baxter robot recognizes bottles and cans and categorizes them into different bins
 layout: default
