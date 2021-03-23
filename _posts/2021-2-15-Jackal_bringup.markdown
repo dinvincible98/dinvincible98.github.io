@@ -1,20 +1,32 @@
 ---
 title: Jackal ROS Noetic Bringup 
-subtitle: Network Configuration|ROS|Debugging
+subtitle: Network Configuration|Robot Setup|ROS|Debugging
 layout: default
 modal-id: 8
 date: 2021-02-15
 img: jackal.jpg
 thumbnail: jackal.jpg
 alt: image-alt
-video: https://www.youtube.com/embed/BzSmWLWmOxg
+video: https://www.youtube.com/embed/kWFRQgxNj1g
 project-date: Feburary 2021
 Bringup: Source Code
 category: Web Development
 intro: Brief Description
-description:  This is the final project for the course MAE106 mechanical system labratory at UC Irvine and the task is to design a wheel robot and participate a robot contest.
-sub: Mechanical Design
-description2: Our mechanical design goals were to build a robot that was stable, efficient and has a low fraction. To achieve stability, we wanted to make sure the error is small, so we employed the CNC router to cut pur wood plates. For wood selection, we chose plywood instead of the one given by school because it is lighter, smoother and has a better structure for CNC cutting. Besides, we cut two polycarbonate plates for the installation of power transmission. Moreover, we expected collision with other robots, so we tried to lower the center of mass of our robot by reducing the length of vertical plates.
-sub2: Software design
-description3: For software design, we first want an accurate heading reading. We had heard that the magnetometer would be interfered by many factors, since the magnetic field of the earth is quite weak compared to the magnets, solenoids, and other electronics, so we decided to also add a gyroscope to eliminate sudden, and incorrect directionschange. We bought a LSM9DS1 chip — a 9DOF IMU with a magnetometer, an accelerometer and a gyro. To code this chip, we modified the existing library for this Adafruit LSM9DS1, so the heading is calculated within the library functions. Calibrations were added into the sensor reading functions, along with a simple low pass filter. The magnetometer read just fine, but the gyro, after integration, always have a random shift, the accelerometer after two integrations only got worse. We then tried comparing heading readings both from the magnetometer and the gyro using a Madgwick filter, the shift is kind of eliminated. Initially, it still has a low frequency noise that puts a plus or minus 10 degrees, but after adjusting the low pass filter of the magnetometer and gyro readings, the noise is much smaller.<br>For more detailed information, please view my github page below.
+description:  This is a setup instruction for how to bring Clearpath Jackal to ROS Noetic which is the latest version of ROS. Since many packages used for Jackal are not officially released for ROS noetic, this instruction will guide you how to build and set up jackal from scratch.
+sub: Process Architecture
+description2: 1. Installing Ubuntu 20.04 LTS<br>2. Setting up the wireless network<br>3. Installing ROS Noetic<br>4. Building packages and dependencies on Jackal<br>5. Building Jackal packages on remote pc<br>6. Setting up ROS between Jackal and remote PC<br>7. Final setup for Jackal specifics
+sub2: 1. Installing Ubuntu 20.04 LTS
+description3: The first step is to install Ubuntu 20.04 LTS on Jackal. I recommended to prepare a new SSD and a bootable USB then follow the official Ubuntu setup from the website.
+sub3: 2. Setting up the wireless network
+description4: The second step is to connect Jackal to Wifi. This step is not strictly necessary but it is very convient if the Jackal connect to the Wifi directly. A detailed instruction can be found in my githhub page bbelow. 
+sub4: 3. Installing ROS Noetic
+description5: Install ROS Noetic on both of your remoet pc and Jackal. Please follow the official ROS setup instruction.
+sub6: 4. Building packages and dependencies on Jackal
+description7: Since many packages for Jackal written by Clearpath aren't released for ROS noetic so they need to be built from source. Building those packages is a strightforward process and it can be done by cloning source code into your own workspace then run catkin_make. See my gthub page for all needed packages and detailed instruction.
+sub8: 5. Building Jackal packages on remote pc
+description9: Similar to the previous step, user need to build unpublished packages by building source code in workspace.
+sub9: 6. Setting up ROS between Jackal and remote PC
+description10: To let your Jackal and PC share a ROS master, you need to set up ROS_MASTER_URI and ROS_HOSTNAME environment on both Jackal and remote pc.
+sub11: 7. Final setup for Jackal specifics
+description12: Those are key steps to get Jackal up and running by setting up all undocumented intricates implemented by Clearpath on a Jacakl image. User need to add udev rules and install package for VLP-16. Please see my github page below for detailed instructions.
 ---

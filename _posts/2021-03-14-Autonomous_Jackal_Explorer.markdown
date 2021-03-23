@@ -44,5 +44,5 @@ sub12:
 description13: Demo
 image5: https://user-images.githubusercontent.com/70287453/111059811-eb556800-845d-11eb-906a-2048baa3e898.gif
 sub13: Future Work
-description14: 1. Add a boundary feature to the automapping so I can specify an area for the robot to explore instead of trying to map the whole environment(Not realistic if given a very large environment).<br>2. Implement lidar - camera fusion so the detected objects can be shown in the map and use GPU for handling object detection task.<br>3. Estimate the distance between the camera and objects using the depth information from the realsense camera.
+description14: 1. Add a boundary feature to the automapping so I can specify an area for the robot to explore instead of trying to map the whole environment(Not realistic if given a very large environment).<br>2. Implement lidar - camera fusion so the detected objects can be shown in the map and use GPU for handling object detection task.<br>3. Estimate the distance between the camera and objects using the depth information from the realsense camera.<br>For more information, please visit my github page below.
 ---
