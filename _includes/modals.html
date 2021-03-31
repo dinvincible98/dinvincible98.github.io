@@ -1,5 +1,7 @@
  <!-- Portfolio Modals -->
  {% for post in site.posts %}
+ 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <div class="portfolio-modal modal fade" id="portfolioModal{{ post.modal-id }}" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
             <div class="close-modal" data-dismiss="modal">
@@ -18,12 +20,16 @@
                             <h3>{{ post.intro }}</h3>
                             <p style="font-size:18px;">{{ post.description }}</p>
                             <h3>{{ post.sub }}</h3>
+                            <img src="{{post.image6}}" />
                             <p style="font-size:18px;">{{ post.description2 }}</p>
                             <h3>{{ post.sub2 }}</h3>
                             <p style="font-size:18px;">{{ post.description3 }}</p>
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/slam.pdf">{{post.link1}}</a>
                             <h3>{{ post.sub3 }}</h3>
                             <p style="font-size:18px;">{{ post.description4 }}</p>
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/circle_fit.html">{{post.link2}}</a>
                             <h3>{{ post.sub4 }}</h3>
+                            <img src="{{post.image7}}" />
                             <p style="font-size:18px;">{{ post.description5 }}</p>
                             <ul class="list-inline item-details">
                             <img src="{{post.image1}}" />
@@ -32,8 +38,10 @@
                             <ul class="list-inline item-details">
                             <img src="{{post.image2}}" />                    
                             <h3>{{ post.sub6 }}</h3>
+                            <img src="{{post.image8}}" />
                             <p style="font-size:18px;">{{ post.description7 }}</p>
                             <ul class="list-inline item-details">                                
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/data_assoc.html">{{post.link3}}</a>
                             <h3>{{ post.sub7 }}</h3>
                             <p style="font-size:24px;">{{ post.description8 }}</p>
                             <ul class="list-inline item-details">
@@ -41,6 +49,7 @@
                             <h3>{{ post.sub8 }}</h3>
                             <p style="font-size:18px;">{{ post.description9 }}</p>
                             <ul class="list-inline item-details">                                
+                            <a style="font-size:18px;" href="https://github.com/ME495-Navigation/assignment-dinvincible98/blob/master/rigid2d/doc/2021-02-10%2001-03.pdf">{{post.link4}}</a>
                             <h3>{{ post.sub9 }}</h3>
                             <p style="font-size:18px;">{{ post.description10 }}</p>
                             <ul class="list-inline item-details">                                   

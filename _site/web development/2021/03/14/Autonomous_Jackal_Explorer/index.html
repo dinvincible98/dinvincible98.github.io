@@ -365,6 +365,8 @@
 
      <!-- Portfolio Modals -->
  
+ 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <div class="portfolio-modal modal fade" id="portfolioModal9" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
             <div class="close-modal" data-dismiss="modal">
@@ -381,31 +383,38 @@
                             <hr class="star-primary">
                            <iframe width="700" height="450" src="https://www.youtube.com/embed/qTvNrYvYrNc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             <h3>Brief Description</h3>
-                            <p style="font-size:18px;"></p>
-                            <h3></h3>
-                            <p style="font-size:18px;"></p>
-                            <h3></h3>
-                            <p style="font-size:18px;"></p>
-                            <h3></h3>
-                            <p style="font-size:18px;"></p>
-                            <h3></h3>
-                            <p style="font-size:18px;"></p>
+                            <p style="font-size:18px;">This is my implementation of Extended Kalman Filter SLAM on Turtlebot3. The blue path is the real(ground truth) path, the red one is the EKF slam path and the green one is the odometery path. The blue circles are tubes from simulator, green circles are landmarks sensed by customized laserscan and the yellow circles are estimated locations of landmark from EKF SLAM.</p>
+                            <h3>Turtle Simulator</h3>
+                            <img src="https://user-images.githubusercontent.com/70287453/113029334-e973f000-9151-11eb-9d7a-b25c36e05183.gif" />
+                            <p style="font-size:18px;">This is a customized simultor for turtlebot3. In this simulator, the turtlebot is represented by a green sphere. Tubes are shown in blue color at given location. When the robot moves close enough to the tubes, the fake laserscan can detect them and publish the red tubes with some noises. The fake laserscan uses circle-line intersection algorithm to detect the tubes.</p>
+                            <h3>EKF SLAM</h3>
+                            <p style="font-size:18px;">EKF SLAM is a class of algorithms which utilizes the extended Kalman filter (EKF) for simultaneous localization and mapping (SLAM). Typically, EKF SLAM algorithms are feature based, and use the maximum likelihood algorithm for data association.<br> This algorithm can be divided into two parts:State update and measurement update. The state estimate is the same for both.<br>The robot state used a probabilistic motion model. Xi bar is the state estimate at time t, g is the motion model, u is the body twist at time t and epsilion is the motion noise:<br>\begin{equation} \hat{\xi_t^-} = g(\hat{\xi}_{t-1}, u_t, \epsilon) \end{equation}<br>Next, propagate the uncertainty using linearized transition model:<br>\begin{equation} \hat{\Sigma_t^-} = g'(\hat{\xi}_{t-1}, u_t, \epsilon) \ \hat{\Sigma}_{t-1} \ g'(\hat{\xi}_{t-1}, u_t,\epsilon)^T + \bar{Q} \end{equation}<br>The process noise is a diagonal matrix corresponding to the gaussian noise for the robot pose(x,y,theta)<br>\begin{equation}\bar{Q} =\begin{bmatrix} Q & 0_{3*2n} \\ 0_{2n*3} & 0_{2n*2n} \end{bmatrix}\end{equation}<br>The algorithm can be found below.</p>
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/slam.pdf">EKF SLAM</a>
+                            <h3>Feature Detection</h3>
+                            <p style="font-size:18px;">The laserscan is clustered by many points using a distance threshold. To find circles in cluster, I implemented the circle fitting algorithm. The algorithm can be found below.</p>
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/circle_fit.html">Circle Fitting</a>
+                            <h3>Known Data Association</h3>
+                            <img src="https://user-images.githubusercontent.com/70287453/111915711-a1641780-8a45-11eb-8195-0a614c478679.gif" />
+                            <p style="font-size:18px;">Known Data Association assumes we known the relative positions of landmarks in the robot frame.<br> For each measurement, i is assocaited with landmark j, then compute the Kalman gain K.<br>\begin{equation} K_i = \Sigma_t^- h_j' \ (\xi_t)^T (h_j' \ (\xi_t) \Sigma_t^- \ h_j'(\xi_t)^T + R)^{-1} \end{equation}<br> Next, use the measurement model to predict the state given current belief and updated posterior state<br>\begin{equation}\hat{z_t}^i = h_j(\hat{\xi_t^-}) \end{equation}<br>\begin{equation} \hat{\xi_t} = \hat{\xi_t^-} + K_i(z_t^- - \hat{z_t^i}) \end{equation}<br> Lastly, compose the posterior covariance.<br>	\begin{equation} \Sigma_t = (I - K_i h_j'(\xi_t)) \Sigma_t^- \end{equation}<br></p>
                             <ul class="list-inline item-details">
                             <img src="" />
                             <h3></h3>
                             <p style="font-size:24px;"></p>
                             <ul class="list-inline item-details">
                             <img src="" />                    
-                            <h3></h3>
-                            <p style="font-size:18px;"></p>
+                            <h3>Unknown Data Association</h3>
+                            <img src="https://user-images.githubusercontent.com/70287453/111963676-c8602f00-8ac1-11eb-87e3-ce65009a0f91.gif" />
+                            <p style="font-size:18px;">This data association is achieved by using the mahalanobis distance.<br> Iterates over the number of the observed landmarks N where k is the landmark number.<br>\begin{equation} \psi_k = h_k’(\hat{\xi_t}^-) \Sigma_t^- \ h_k’(\hat{\xi_t}^-)^T + R \end{equation}<br> Then, calculate the predicted measurement above<br> Next, compute the Mahalanobis distance and append to a vector of measurements<br> \begin{equation} d_k = (z_i - \hat{z_k}) \psi_k (z_i - \hat{z_k})^T \end{equation}<br>Let d_star be the minimum mahalonbis distance and  be the landmark index corresponding to the minimimum distance. If d_star is smaller than the lower-bound Mahalanobis threshold, then j is the index used in the measurement update. If it is greater than the upper-bound Mahalanobis threshold, then j = N and increase N by 1.<br> The algorithm can be found below.</p>
                             <ul class="list-inline item-details">                                
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/data_assoc.html">Unknown Data Association</a>
                             <h3></h3>
                             <p style="font-size:24px;"></p>
                             <ul class="list-inline item-details">
                             <img src="" />                                    
-                            <h3></h3>
-                            <p style="font-size:18px;"></p>
+                            <h3>Differential Drive Control</h3>
+                            <p style="font-size:18px;">The diff_drive class performs the calculation for turtlebot's odometery. The purpose of this class is to convert wheel velocities to a body twist Vb and then integrate twist to get pose.<br> The full explaination can be found below.</p>
                             <ul class="list-inline item-details">                                
+                            <a style="font-size:18px;" href="https://github.com/ME495-Navigation/assignment-dinvincible98/blob/master/rigid2d/doc/2021-02-10%2001-03.pdf">Differential Drive Calculation</a>
                             <h3></h3>
                             <p style="font-size:18px;"></p>
                             <ul class="list-inline item-details">                                   
@@ -455,6 +464,8 @@
         </div>
     </div>
 
+ 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <div class="portfolio-modal modal fade" id="portfolioModal7" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
             <div class="close-modal" data-dismiss="modal">
@@ -473,12 +484,16 @@
                             <h3>Brief Description</h3>
                             <p style="font-size:18px;">This is my individual winter project at Northwestern University. The goal of the project is to build a mobile robotic system equipped with perception, localization, mapping and navigation abilities in both simulation and real world. The robot is capable of exploring an unknown environment autonomously and mapping the world. It can also detect pedestrians and classify different objects with lidar and camera. Based on the changing the environment, the robot should give responses accordingly.</p>
                             <h3>Hardware Dependencies</h3>
+                            <img src="" />
                             <p style="font-size:18px;">Clearpath Jackal Robot, Velodyne-16 Lidar, Intel Realsense Camera D435i</p>
                             <h3>Software Dependencies</h3>
                             <p style="font-size:18px;">Gazebo, Slam Toolbox, Costmap2D, hdl people tracking, NumPy, OpenCV(4.5.1), YOLOv4-tiny</p>
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/slam.pdf"></a>
                             <h3>Project Breakdown</h3>
                             <p style="font-size:18px;">1.SLAM(Simultaneous Localization and Mapping)<br>2.Frontier Exploration<br>3. People Tracking<br>4.Real-time Object Detecion</p>
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/circle_fit.html"></a>
                             <h3>Part 1. SLAM</h3>
+                            <img src="" />
                             <p style="font-size:18px;">SLAM(Simultaneous Localization and Mapping) technology allows the robot to map an unknown environment while keeps tracking its own location. I used slam toolbox package to accomplish the task.Below is a SLAM flowchart for Jackal.</p>
                             <ul class="list-inline item-details">
                             <img src="https://user-images.githubusercontent.com/70287453/111082277-67d75d80-84d5-11eb-9138-d69e5b4e340e.png" />
@@ -487,8 +502,10 @@
                             <ul class="list-inline item-details">
                             <img src="https://user-images.githubusercontent.com/70287453/111059530-f3140d00-845b-11eb-8aa3-7b2310e49384.gif" />                    
                             <h3>Part 2. Frontier Exploration</h3>
+                            <img src="" />
                             <p style="font-size:18px;">Frontier exploration is a fast and advanced algorithm for robot to explore in an unknown environment and map the world. This algorithm finds every existed frontiers and robot will move to the closest frontier based on its distance to the centroid of frontier. A detailed explaination for my implementation of the algorithm can be found at my github page below.</p>
                             <ul class="list-inline item-details">                                
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/data_assoc.html"></a>
                             <h3></h3>
                             <p style="font-size:24px;">Demo</p>
                             <ul class="list-inline item-details">
@@ -496,6 +513,7 @@
                             <h3></h3>
                             <p style="font-size:18px;">As shown in the demo, robot will move to the centroid of the closest frontier and constantly updating the map. All found frontiers are represented in blue; If the robot dose not move to the target point in a time limit, then the frontier will turn red and robot will move to the next frontier point.</p>
                             <ul class="list-inline item-details">                                
+                            <a style="font-size:18px;" href="https://github.com/ME495-Navigation/assignment-dinvincible98/blob/master/rigid2d/doc/2021-02-10%2001-03.pdf"></a>
                             <h3>Part 3. People Tracking</h3>
                             <p style="font-size:18px;">For people tracking feature, I used hdl_people tracking package which can detect walking pedestrains by extracting information from the pointcloud data then displayed as markerarray in Rviz.</p>
                             <ul class="list-inline item-details">                                   
@@ -545,6 +563,8 @@
         </div>
     </div>
 
+ 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <div class="portfolio-modal modal fade" id="portfolioModal8" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
             <div class="close-modal" data-dismiss="modal">
@@ -563,12 +583,16 @@
                             <h3>Brief Description</h3>
                             <p style="font-size:18px;">This is a setup instruction for how to bring Clearpath Jackal to ROS Noetic which is the latest version of ROS. Since many packages used for Jackal are not officially released for ROS noetic, this instruction will guide you how to build and set up jackal from scratch.</p>
                             <h3>Process Architecture</h3>
+                            <img src="" />
                             <p style="font-size:18px;">1. Installing Ubuntu 20.04 LTS<br>2. Setting up the wireless network<br>3. Installing ROS Noetic<br>4. Building packages and dependencies on Jackal<br>5. Building Jackal packages on remote pc<br>6. Setting up ROS between Jackal and remote PC<br>7. Final setup for Jackal specifics</p>
                             <h3>1. Installing Ubuntu 20.04 LTS</h3>
                             <p style="font-size:18px;">The first step is to install Ubuntu 20.04 LTS on Jackal. I recommended to prepare a new SSD and a bootable USB then follow the official Ubuntu setup from the website.</p>
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/slam.pdf"></a>
                             <h3>2. Setting up the wireless network</h3>
                             <p style="font-size:18px;">The second step is to connect Jackal to Wifi. This step is not strictly necessary but it is very convient if the Jackal connect to the Wifi directly. A detailed instruction can be found in my githhub page bbelow.</p>
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/circle_fit.html"></a>
                             <h3>3. Installing ROS Noetic</h3>
+                            <img src="" />
                             <p style="font-size:18px;">Install ROS Noetic on both of your remoet pc and Jackal. Please follow the official ROS setup instruction.</p>
                             <ul class="list-inline item-details">
                             <img src="" />
@@ -577,8 +601,10 @@
                             <ul class="list-inline item-details">
                             <img src="" />                    
                             <h3>4. Building packages and dependencies on Jackal</h3>
+                            <img src="" />
                             <p style="font-size:18px;">Since many packages for Jackal written by Clearpath aren't released for ROS noetic so they need to be built from source. Building those packages is a strightforward process and it can be done by cloning source code into your own workspace then run catkin_make. See my gthub page for all needed packages and detailed instruction.</p>
                             <ul class="list-inline item-details">                                
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/data_assoc.html"></a>
                             <h3></h3>
                             <p style="font-size:24px;"></p>
                             <ul class="list-inline item-details">
@@ -586,6 +612,7 @@
                             <h3>5. Building Jackal packages on remote pc</h3>
                             <p style="font-size:18px;">Similar to the previous step, user need to build unpublished packages by building source code in workspace.</p>
                             <ul class="list-inline item-details">                                
+                            <a style="font-size:18px;" href="https://github.com/ME495-Navigation/assignment-dinvincible98/blob/master/rigid2d/doc/2021-02-10%2001-03.pdf"></a>
                             <h3>6. Setting up ROS between Jackal and remote PC</h3>
                             <p style="font-size:18px;">To let your Jackal and PC share a ROS master, you need to set up ROS_MASTER_URI and ROS_HOSTNAME environment on both Jackal and remote pc.</p>
                             <ul class="list-inline item-details">                                   
@@ -635,6 +662,8 @@
         </div>
     </div>
 
+ 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
             <div class="close-modal" data-dismiss="modal">
@@ -653,12 +682,16 @@
                             <h3>Brief Description</h3>
                             <p style="font-size:18px;">This is a default final project "Jack/Dice in the box" for ME314 Machine Dynamics at Northwestern University. The goal of this project is to simulate a dice bouncing inside of a moving box as shown in the demo.</p>
                             <h3>Modeling System</h3>
+                            <img src="" />
                             <p style="font-size:18px;">In this project, the system contains two bodies:A dice and a box.The dice has a length of 1, mass of 1 and box has a length of 6, mass of 6.Both bodies have rotational inertia equals 1(Assuming the center of the mass is the center of the geometry).The dice has a configuration(x_dice, y_dice, theta_dice) and the box has a configuration(x_box, y_box, theta_box).The system involves 3 frames:world_frame, box_frame and dice_frame.And there are two external forces apply to the box in x and y direction which cause the box to move along a trajectory.The dice falls from the center of the box and should experience several impacts with the box.Also, the dice is contrainted to the inner area of the box and the moving trajectory of the box should not affect by the dice.</p>
                             <h3>Technical Outline</h3>
                             <p style="font-size:18px;">1. Draw a diagram to show the transformation of frame.<br>2. Calculate all the transformation of frame.<br>3. Calculate Lagrangian, Eular-Lagrange equations with the existence of external forces and constraints.<br>4. Wirte function for updating impact equations<br>5. Modify simulation function and run simulation<br>6. Plot the trajectory of dice/box versus time.<br>For more detailed information and explanation, please visit my github page below.</p>
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/slam.pdf"></a>
                             <h3></h3>
                             <p style="font-size:18px;"></p>
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/circle_fit.html"></a>
                             <h3></h3>
+                            <img src="" />
                             <p style="font-size:18px;"></p>
                             <ul class="list-inline item-details">
                             <img src="" />
@@ -667,8 +700,10 @@
                             <ul class="list-inline item-details">
                             <img src="" />                    
                             <h3></h3>
+                            <img src="" />
                             <p style="font-size:18px;"></p>
                             <ul class="list-inline item-details">                                
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/data_assoc.html"></a>
                             <h3></h3>
                             <p style="font-size:24px;"></p>
                             <ul class="list-inline item-details">
@@ -676,6 +711,7 @@
                             <h3></h3>
                             <p style="font-size:18px;"></p>
                             <ul class="list-inline item-details">                                
+                            <a style="font-size:18px;" href="https://github.com/ME495-Navigation/assignment-dinvincible98/blob/master/rigid2d/doc/2021-02-10%2001-03.pdf"></a>
                             <h3></h3>
                             <p style="font-size:18px;"></p>
                             <ul class="list-inline item-details">                                   
@@ -725,6 +761,8 @@
         </div>
     </div>
 
+ 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
             <div class="close-modal" data-dismiss="modal">
@@ -743,12 +781,16 @@
                             <h3>Brief Description</h3>
                             <p style="font-size:18px;">This is the final project for the cource ME 449 Robotic Manipulation at Northwestern University. It is also the capstone project for the course "Modern Robotics" on Cousera.The goal of the project is to wirte a program that enables KUKA youBot to finish a pick and place task in V-Rep simulation scene.</p>
                             <h3>Procedures for motion planning</h3>
+                            <img src="" />
                             <p style="font-size:18px;">1. Plan a trajectory as desired trajectory for the end-effector to follow <br>2. Use the previous desired trajectory in feedfoward+PI to calculate the kinematics of the youBot<br>3. Use the calculated kinematics to drive the youBot <br>4. Save the result as a .csv file and conduct simulation in V-rep scene 6.</p>
                             <h3>Strategy for completing tasks</h3>
                             <p style="font-size:18px;">There are three tasks and I need to choose a controller and find the best configuration setup.<br>For task 'Best', the main goal is to minimize the end effector error so I choose to use Feedfoward + PI controller. With KP = 20, KI = 0.5, this controller presents a very good result that the end effector error becomes very small as time goes by and the KUKA youBot finishes the task smoothly and accurately in the simulation.<br>For task 'Overshoot', I need to find an end effector error with large overshoot value. With KP = 2, KI = 0.001, there is a overshoot between 9 - 14s.<br>For task 'NewTask', I can customized a target location for the robot to go and I used the same strategy as the task 'Best'. With KP = 20, KI = 0.1, the end effector error is very small and the robot finishes the task very well in the simulation.<br>For more detailed information, please visit my github page below.</p>
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/slam.pdf"></a>
                             <h3></h3>
                             <p style="font-size:18px;"></p>
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/circle_fit.html"></a>
                             <h3></h3>
+                            <img src="" />
                             <p style="font-size:18px;"></p>
                             <ul class="list-inline item-details">
                             <img src="" />
@@ -757,8 +799,10 @@
                             <ul class="list-inline item-details">
                             <img src="" />                    
                             <h3></h3>
+                            <img src="" />
                             <p style="font-size:18px;"></p>
                             <ul class="list-inline item-details">                                
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/data_assoc.html"></a>
                             <h3></h3>
                             <p style="font-size:24px;"></p>
                             <ul class="list-inline item-details">
@@ -766,6 +810,7 @@
                             <h3></h3>
                             <p style="font-size:18px;"></p>
                             <ul class="list-inline item-details">                                
+                            <a style="font-size:18px;" href="https://github.com/ME495-Navigation/assignment-dinvincible98/blob/master/rigid2d/doc/2021-02-10%2001-03.pdf"></a>
                             <h3></h3>
                             <p style="font-size:18px;"></p>
                             <ul class="list-inline item-details">                                   
@@ -815,6 +860,8 @@
         </div>
     </div>
 
+ 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
             <div class="close-modal" data-dismiss="modal">
@@ -833,12 +880,16 @@
                             <h3>Brief Description</h3>
                             <p style="font-size:18px;">This is the final team project for the class ME495:Embeded System In Robotics at Northwestern University. In this project, we programmed a Rethink Baxter robot to sort bottles and cans located in front of it, and drop them into separate recycle bins. We used computer vision to detect and locate a couple of randomly placed bottles and cans, and used MoveIt to control the robot.</p>
                             <h3>Team Members</h3>
+                            <img src="" />
                             <p style="font-size:18px;">Jake Ketchum<br>Kailey Smith<br>Yael Ben Shalom<br>Mingqing Yuan<br>Chris Aretakis</p>
                             <h3>System Architecture</h3>
                             <p style="font-size:18px;">Computer Vision(Yael and Jake):We use the realsense depth camera to capture image and use openCV to detect and classify the objects in the image.After the classification process,the programs saves the location and classification information which will be used in manipulation part.<br>Manipulation(Kailey, Mingqing and Chris):We use MoveIt! to control the motion of Baxter. After getting the location and classification information from CV, we call a customized service to return those information as list so Baxter can follow the planned trajectory.</p>
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/slam.pdf"></a>
                             <h3>General Procedures of motion</h3>
                             <p style="font-size:18px;">1. Move to the home position where the robot is safely above all objects.<br>2. For the current item in the list, display either the can image or the bottle image, depending on the classification.<br>3. Next, move to the object's (x,y) corrdinate at a safe z height away. This is the same height for bottles and cans.<br>4. Then move down to the appropriate perch height, depending on classification. (For example, the robot arm will be position further away from the table for bottle, since those are taller than cans).<br>5. Once safely at the perch height, move down so that the object is in between the grippers.<br> 6.Grasp the object.<br> 7.Move back up to the "safe" position as step 3.<br>8. Move back to the home position. This step was added to ensure predictable behavior of the robot arm.<br>9. Depending on the object's classification, move to the appropriate bin. Also, display the recylcing image.<br>10. Once over the bin, open the grippers and drop the object. Show that the object has been recycled with the bin image.<br>11. Repeat for all objects found.<br>For more detailed infomation, please visit my github page.</p>
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/circle_fit.html"></a>
                             <h3>Result</h3>
+                            <img src="" />
                             <p style="font-size:18px;">A good calibration of camera ensures we can get a precise location of bottles and cans relative to the	robot. After getting the locations, robot can move to each one of them and pick the objects. One deficit is we hard-coded the z distance from the gripper to cans/bottles. Even though it works well after many testings, it would be better to calculate the distance from the robot gripper camera.</p>
                             <ul class="list-inline item-details">
                             <img src="" />
@@ -847,8 +898,10 @@
                             <ul class="list-inline item-details">
                             <img src="" />                    
                             <h3>Team Contributions</h3>
+                            <img src="" />
                             <p style="font-size:18px;">Jake Ketchum:Aligned the Realsense Camera to Baxter frame and wrote code for classifying object.<br>Kailey Smith:Integrated the camera and manipulation node. Modified code and did test at Lab.<br>Yael Ben Shalom:Calculated an approximate offset for the realsense camera and wrote code for classfiying objects and rosunit test.<br>Mingqing Yuan:Laid out the preliminary code for the manipulation of the baxter and did initial movement testing.<br>Chris Aretakis:Laid out pseudo code for motion and designed a gripper for Baxter.</p>
                             <ul class="list-inline item-details">                                
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/data_assoc.html"></a>
                             <h3></h3>
                             <p style="font-size:24px;"></p>
                             <ul class="list-inline item-details">
@@ -856,6 +909,7 @@
                             <h3></h3>
                             <p style="font-size:18px;"></p>
                             <ul class="list-inline item-details">                                
+                            <a style="font-size:18px;" href="https://github.com/ME495-Navigation/assignment-dinvincible98/blob/master/rigid2d/doc/2021-02-10%2001-03.pdf"></a>
                             <h3></h3>
                             <p style="font-size:18px;"></p>
                             <ul class="list-inline item-details">                                   
@@ -905,6 +959,8 @@
         </div>
     </div>
 
+ 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
             <div class="close-modal" data-dismiss="modal">
@@ -923,12 +979,16 @@
                             <h3>Brief Description</h3>
                             <p style="font-size:18px;">This is a RRT challenge in MSR Hackathon at Northwestern University. Rapidly-Exploring Random Tree (RRT) is a fundamental path planning algorithm in robotics. It consists of a set of vertices, which represent configurations in some domain D and edges, which connect two vertices. The algorithm randomly builds a tree in such a way that, as the number of vertices n increases to inifinity, the vertices are uniformly distributed across the domain D in R^n space.<br> For more information, please visit my github page below.</p>
                             <h3></h3>
+                            <img src="" />
                             <p style="font-size:18px;"></p>
                             <h3></h3>
                             <p style="font-size:18px;"></p>
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/slam.pdf"></a>
                             <h3></h3>
                             <p style="font-size:18px;"></p>
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/circle_fit.html"></a>
                             <h3></h3>
+                            <img src="" />
                             <p style="font-size:18px;"></p>
                             <ul class="list-inline item-details">
                             <img src="" />
@@ -937,8 +997,10 @@
                             <ul class="list-inline item-details">
                             <img src="" />                    
                             <h3></h3>
+                            <img src="" />
                             <p style="font-size:18px;"></p>
                             <ul class="list-inline item-details">                                
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/data_assoc.html"></a>
                             <h3></h3>
                             <p style="font-size:24px;"></p>
                             <ul class="list-inline item-details">
@@ -946,6 +1008,7 @@
                             <h3></h3>
                             <p style="font-size:18px;"></p>
                             <ul class="list-inline item-details">                                
+                            <a style="font-size:18px;" href="https://github.com/ME495-Navigation/assignment-dinvincible98/blob/master/rigid2d/doc/2021-02-10%2001-03.pdf"></a>
                             <h3></h3>
                             <p style="font-size:18px;"></p>
                             <ul class="list-inline item-details">                                   
@@ -995,6 +1058,8 @@
         </div>
     </div>
 
+ 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
             <div class="close-modal" data-dismiss="modal">
@@ -1013,12 +1078,16 @@
                             <h3>Brief Description</h3>
                             <p style="font-size:18px;">This is the final project for course MAE 172 Robot Design at UC Irvine. This is a customized project from the scratch and fulfills the course requirement.</p>
                             <h3>Motivation</h3>
+                            <img src="" />
                             <p style="font-size:18px;">1.Many games need card shuffling are popular<br>2.Cards shuffled by hand are easy to be curved<br>3.No product with acceptable price for family market<br>4.Card dealing by hand takes a lot of time and makes errors.</p>
                             <h3>Design description</h3>
                             <p style="font-size:18px;">The mechanism of this design is very straightforward. In the beginning, the user turns on the machine then the rack and pinion elevator will lift the poker case approximately 55mm up. Next, the user put one deck of poker into the case. While IR sensors detect cards, two rollers connected to motors on the poker case begin to roll in opposite directions until after the IR sensor detects there are no cards in the poker case continuously 12 times. After distributing cards onto the left and right platform, the elevator goes down and motors beneath two platforms start working and drive cards back to the poker case. When all cards are dispensed back to the poker case, the elevator rises to the highest point and shakes 0.5 seconds to the cards to make them into a deck so the user can easily remove cards. When all cards are removed and IR sensors detect nothing, the elevator goes down to the original position. One complete shuffling process takes approximately 50 seconds. Moreover, we have a switch for the purple LED lights, which can make the shuffler look cool at night and users can play cards in the dark.<br> For more detailed explanation, please view my github page below.</p>
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/slam.pdf"></a>
                             <h3></h3>
                             <p style="font-size:18px;"></p>
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/circle_fit.html"></a>
                             <h3></h3>
+                            <img src="" />
                             <p style="font-size:18px;"></p>
                             <ul class="list-inline item-details">
                             <img src="" />
@@ -1027,8 +1096,10 @@
                             <ul class="list-inline item-details">
                             <img src="" />                    
                             <h3></h3>
+                            <img src="" />
                             <p style="font-size:18px;"></p>
                             <ul class="list-inline item-details">                                
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/data_assoc.html"></a>
                             <h3></h3>
                             <p style="font-size:24px;"></p>
                             <ul class="list-inline item-details">
@@ -1036,6 +1107,7 @@
                             <h3></h3>
                             <p style="font-size:18px;"></p>
                             <ul class="list-inline item-details">                                
+                            <a style="font-size:18px;" href="https://github.com/ME495-Navigation/assignment-dinvincible98/blob/master/rigid2d/doc/2021-02-10%2001-03.pdf"></a>
                             <h3></h3>
                             <p style="font-size:18px;"></p>
                             <ul class="list-inline item-details">                                   
@@ -1085,6 +1157,8 @@
         </div>
     </div>
 
+ 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
             <div class="close-modal" data-dismiss="modal">
@@ -1103,12 +1177,16 @@
                             <h3>Brief Description</h3>
                             <p style="font-size:18px;">This is the final project for the course MAE106 mechanical system labratory at UC Irvine and the task is to design a wheel robot and participate a robot contest.</p>
                             <h3>Mechanical Design</h3>
+                            <img src="" />
                             <p style="font-size:18px;">Our mechanical design goals were to build a robot that was stable, efficient and has a low fraction. To achieve stability, we wanted to make sure the error is small, so we employed the CNC router to cut pur wood plates. For wood selection, we chose plywood instead of the one given by school because it is lighter, smoother and has a better structure for CNC cutting. Besides, we cut two polycarbonate plates for the installation of power transmission. Moreover, we expected collision with other robots, so we tried to lower the center of mass of our robot by reducing the length of vertical plates.</p>
                             <h3>Software design</h3>
                             <p style="font-size:18px;">For software design, we first want an accurate heading reading. We had heard that the magnetometer would be interfered by many factors, since the magnetic field of the earth is quite weak compared to the magnets, solenoids, and other electronics, so we decided to also add a gyroscope to eliminate sudden, and incorrect directionschange. We bought a LSM9DS1 chip — a 9DOF IMU with a magnetometer, an accelerometer and a gyro. To code this chip, we modified the existing library for this Adafruit LSM9DS1, so the heading is calculated within the library functions. Calibrations were added into the sensor reading functions, along with a simple low pass filter. The magnetometer read just fine, but the gyro, after integration, always have a random shift, the accelerometer after two integrations only got worse. We then tried comparing heading readings both from the magnetometer and the gyro using a Madgwick filter, the shift is kind of eliminated. Initially, it still has a low frequency noise that puts a plus or minus 10 degrees, but after adjusting the low pass filter of the magnetometer and gyro readings, the noise is much smaller.<br>For more detailed information, please view my github page below.</p>
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/slam.pdf"></a>
                             <h3></h3>
                             <p style="font-size:18px;"></p>
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/circle_fit.html"></a>
                             <h3></h3>
+                            <img src="" />
                             <p style="font-size:18px;"></p>
                             <ul class="list-inline item-details">
                             <img src="" />
@@ -1117,8 +1195,10 @@
                             <ul class="list-inline item-details">
                             <img src="" />                    
                             <h3></h3>
+                            <img src="" />
                             <p style="font-size:18px;"></p>
                             <ul class="list-inline item-details">                                
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/data_assoc.html"></a>
                             <h3></h3>
                             <p style="font-size:24px;"></p>
                             <ul class="list-inline item-details">
@@ -1126,6 +1206,7 @@
                             <h3></h3>
                             <p style="font-size:18px;"></p>
                             <ul class="list-inline item-details">                                
+                            <a style="font-size:18px;" href="https://github.com/ME495-Navigation/assignment-dinvincible98/blob/master/rigid2d/doc/2021-02-10%2001-03.pdf"></a>
                             <h3></h3>
                             <p style="font-size:18px;"></p>
                             <ul class="list-inline item-details">                                   
