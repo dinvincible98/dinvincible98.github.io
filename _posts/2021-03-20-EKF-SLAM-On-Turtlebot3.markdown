@@ -10,7 +10,7 @@ thumbnail: unknownEKF.gif
 alt: image-alt
 video: https://www.youtube.com/embed/qTvNrYvYrNc
 project-date: March 2021
-Jackal: Source Code
+EKF: Source Code
 category: Web Development
 intro: Brief Description
 description: This is my implementation of Extended Kalman Filter SLAM on Turtlebot3. The blue path is the real(ground truth) path, the red one is the EKF slam path and the green one is the odometery path. The blue circles are tubes from simulator, green circles are landmarks sensed by customized laserscan and the yellow circles are estimated locations of landmark from EKF SLAM. 
