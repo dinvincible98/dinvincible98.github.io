@@ -115,6 +115,22 @@
                                 <i class="fa fa-plus fa-3x"></i>
                             </div>
                         </div>
+                        <img src="img/portfolio/flow.gif" class="img-responsive img-centered" alt="">
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>3D optical flow</h4>
+                        <p class="text-muted">Computer Vision|Pointcloud Processing|Deep Learning</p>
+                        <p class="text-muted">A deep learning model that can perdict sub-pixel movement from 3d optical flow</p>
+                    </div>
+                </div>
+            
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a href="#portfolioModal9" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
                         <img src="img/portfolio/unknownEKF.gif" class="img-responsive img-centered" alt="">
                     </a>
                     <div class="portfolio-caption">
@@ -379,6 +395,109 @@
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="modal-body">
+                            <h2>3D optical flow</h2>
+                            <hr class="star-primary">
+                           <iframe width="700" height="450" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <h3>Brief Description</h3>
+                            <p style="font-size:18px;">This is my final project at Northwestern University. The project is focused on using a rgbd camera(Intel Realsense D435i) to capture an object with random motion. By capturing the pointcloud at consecutive timestamps and giving a groundtruth motion, the deep learning model is able to learn the sub-piexl motion(less than 5mm). The whole project is simulation based using ROS and Gazebo.</p>
+                            <h3>Software Dependencies</h3>
+                            <img src="" />
+                            <p style="font-size:18px;">Gazebo, PCL, Open3D, NumPy, OpenCV(4.5.1), Pyrealsense</p>
+                            <h3>Project Breakdown</h3>
+                            <p style="font-size:18px;">1.Setup simulation environment<br>2.Post-processing raw pointcloud data<br>3.Given random gaussian motion<br>4.Capture pointcloud data and corresponding groundtruth motion<br>5.Training Deep learning model<br>6.Evaluation of the model<br></p>
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/slam.pdf"></a>
+                            <h3>Part 1. Setup simulation environment</h3>
+                            <p style="font-size:18px;">The simulation is all done in Gazebo. The realsense camera is pointing at the small cube which is the moving object. The giant cube behind acts like a static wall. The idea here is when the small cube is moving which means its pointcloud is also shifting, whereas the wall will not move and act like a ground reference. It is important for the deep learning model to learn the motion.</p>
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/circle_fit.html"></a>
+                            <h3></h3>
+                            <img src="" />
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">
+                            <img src="https://user-images.githubusercontent.com/70287453/145697005-a5e690b8-242a-4917-a2f1-5a3d55eea54f.png" />
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details">
+                            <img src="" />                    
+                            <h3>Part 2. Post-processing raw pointcloud data</h3>
+                            <img src="" />
+                            <p style="font-size:18px;">In this step, I used PCL library for post-processing raw pointcloud data. I used passfilters, voxelgrid filter to filter out unnecessary point clouds and only focuses on ROI(region of interest).</p>
+                            <ul class="list-inline item-details">                                
+                            <a style="font-size:18px;" href="https://nu-msr.github.io/navigation_site/data_assoc.html"></a>
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details">
+                            <img src="https://user-images.githubusercontent.com/70287453/145697021-d77cfa97-345e-4165-8d99-3fe8d5179086.png" />                                    
+                            <h3></h3>
+                            <p style="font-size:18px;"></p>
+                            <ul class="list-inline item-details">                                
+                            <a style="font-size:18px;" href="https://github.com/ME495-Navigation/assignment-dinvincible98/blob/master/rigid2d/doc/2021-02-10%2001-03.pdf"></a>
+                            <h3>Part 3. Given random gaussian motion</h3>
+                            <p style="font-size:18px;">I wrote a ROS simulation node which subscribe the states of the cube from gazebo world then publish a motion with gaussian noise added to it. The motion is very small(<5mm) since I want to achieve sub-pixel movement prediction.</p>
+                            <ul class="list-inline item-details">                                   
+                            <h3></h3>
+                            <p style="font-size:24px;"></p>
+                            <ul class="list-inline item-details"> 
+                            <img src="" />  
+                            <h3>Part 4. Capture pointcloud data and corresponding groundtruth motion</h3>
+                            <p style="font-size:18px;">In this step, I firstly saved pointcloud data and corresponding motion data into rosbag and then convert it to pcd files and motion.txt file. Aligining the timestamp is key here, I used python for extracting files names and timestamps then did a matching for pcd files and corresponding motion in the same timestamp</p>
+                            <ul class="list-inline item-details">
+                            <h3>Part 5. Training Deep learning model</h3>
+                            <p style="font-size:24px;">The deep learning model adopted the thinking of scene flownet3d. It consist of set conv2d layers, flow-embedding layers and set upconv2d layers. set conv2d layers is used for grouping pointclouds based on a specific radius. flow-embedding layers learns to aggregrate both feature similarites and spatial relationship to produce embeddings that encode point motions. the set upconv2d layers are used to propapage and refine the embedding in a informed way. In the original flownet3d, it uses rgb color as a learning feature and it calculates the geometric differences between two pointcloud. However, my proposed approch does not rely on the rgb color and geometric difference. Insted, I give a groundturth motion for a pair of pointcloud and see if the model can learn such motion.</p>
+                            <ul class="list-inline item-details"> 
+                            <img src="" />  
+                            <h3>6.Evaluation of the model</h3>
+                            <p style="font-size:18px;">I generate around 15000 pointcloud from simulations and I use 13000 files for training and rest for testing. During evaluation, I use two accuarcy metrics. 1.Error within 10mm. 2. Error within 5mm. The final accuracy reaches 78% for errors within 10mm but only 52% for errors within 5mm. Even though the result is not very ideal, it can be improved by creating a larger dataset and tunning some hyperparameters.</p>
+                            <ul class="list-inline item-details">                               
+                                <li>Github page:
+                                	
+                                	<strong><a href=https://github.com/dinvincible98/ME314-Final-Project></a>
+                                    </strong>                                
+                                    <strong><a href=https://github.com/dinvincible98/ME449-Robot-Manipulation></a>
+                                    </strong>
+                                    <strong><a href=https://github.com/dinvincible98/ME495-final-project></a>
+                                    </strong>
+                                </li>
+                                	<strong><a href=https://github.com/dinvincible98/Hackathon-RRT></a>
+                                    </strong>
+                                    <strong><a href=https://github.com/dinvincible98/MAE172-Card-shuffler></a>
+                                    </strong>
+                                    <strong><a href=https://github.com/dinvincible98/MAE106></a>
+                                    </strong>
+                                    </strong><a href=https://github.com/dinvincible98/Autonomous_Jackal_Explorer></a>
+                                    </strong>
+                                    </strong><a href=https://github.com/dinvincible98/EKF-SLAM-on-Turtlebot3-from-Scratch/tree/main/nuslam></a>
+                                    </strong>
+                                    </strong><a href=https://github.com/dinvincible98/Jackal_ROS_Noetic_Bringup></a>
+                                    </strong>
+                                    </strong><a href=https://github.com/dinvincible98/3D_Optical_Flow>Source Code</a>
+                                    </strong>
+                                <li>Date:
+                                    <strong>Dec 2021
+                                    </strong>
+                                </li>
+                            </ul>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <div class="portfolio-modal modal fade" id="portfolioModal9" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
                             <h2>EKF SLAM On Turtlebot3 from Scratch</h2>
                             <hr class="star-primary">
                            <iframe width="700" height="450" src="https://www.youtube.com/embed/qTvNrYvYrNc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -452,6 +571,8 @@
                                     </strong><a href=https://github.com/dinvincible98/EKF-SLAM-on-Turtlebot3-from-Scratch/tree/main/nuslam>Source Code</a>
                                     </strong>
                                     </strong><a href=https://github.com/dinvincible98/Jackal_ROS_Noetic_Bringup></a>
+                                    </strong>
+                                    </strong><a href=https://github.com/dinvincible98/3D_Optical_Flow></a>
                                     </strong>
                                 <li>Date:
                                     <strong>March 2021
@@ -554,6 +675,8 @@
                                     </strong>
                                     </strong><a href=https://github.com/dinvincible98/Jackal_ROS_Noetic_Bringup></a>
                                     </strong>
+                                    </strong><a href=https://github.com/dinvincible98/3D_Optical_Flow></a>
+                                    </strong>
                                 <li>Date:
                                     <strong>March 2021
                                     </strong>
@@ -654,6 +777,8 @@
                                     </strong><a href=https://github.com/dinvincible98/EKF-SLAM-on-Turtlebot3-from-Scratch/tree/main/nuslam></a>
                                     </strong>
                                     </strong><a href=https://github.com/dinvincible98/Jackal_ROS_Noetic_Bringup>Source Code</a>
+                                    </strong>
+                                    </strong><a href=https://github.com/dinvincible98/3D_Optical_Flow></a>
                                     </strong>
                                 <li>Date:
                                     <strong>Feburary 2021
@@ -756,6 +881,8 @@
                                     </strong>
                                     </strong><a href=https://github.com/dinvincible98/Jackal_ROS_Noetic_Bringup></a>
                                     </strong>
+                                    </strong><a href=https://github.com/dinvincible98/3D_Optical_Flow></a>
+                                    </strong>
                                 <li>Date:
                                     <strong>December 2020
                                     </strong>
@@ -856,6 +983,8 @@
                                     </strong><a href=https://github.com/dinvincible98/EKF-SLAM-on-Turtlebot3-from-Scratch/tree/main/nuslam></a>
                                     </strong>
                                     </strong><a href=https://github.com/dinvincible98/Jackal_ROS_Noetic_Bringup></a>
+                                    </strong>
+                                    </strong><a href=https://github.com/dinvincible98/3D_Optical_Flow></a>
                                     </strong>
                                 <li>Date:
                                     <strong>December 2020
@@ -958,6 +1087,8 @@
                                     </strong>
                                     </strong><a href=https://github.com/dinvincible98/Jackal_ROS_Noetic_Bringup></a>
                                     </strong>
+                                    </strong><a href=https://github.com/dinvincible98/3D_Optical_Flow></a>
+                                    </strong>
                                 <li>Date:
                                     <strong>December 2020
                                     </strong>
@@ -1058,6 +1189,8 @@
                                     </strong><a href=https://github.com/dinvincible98/EKF-SLAM-on-Turtlebot3-from-Scratch/tree/main/nuslam></a>
                                     </strong>
                                     </strong><a href=https://github.com/dinvincible98/Jackal_ROS_Noetic_Bringup></a>
+                                    </strong>
+                                    </strong><a href=https://github.com/dinvincible98/3D_Optical_Flow></a>
                                     </strong>
                                 <li>Date:
                                     <strong>Sep 2020
@@ -1160,6 +1293,8 @@
                                     </strong>
                                     </strong><a href=https://github.com/dinvincible98/Jackal_ROS_Noetic_Bringup></a>
                                     </strong>
+                                    </strong><a href=https://github.com/dinvincible98/3D_Optical_Flow></a>
+                                    </strong>
                                 <li>Date:
                                     <strong>Mar 2020
                                     </strong>
@@ -1260,6 +1395,8 @@
                                     </strong><a href=https://github.com/dinvincible98/EKF-SLAM-on-Turtlebot3-from-Scratch/tree/main/nuslam></a>
                                     </strong>
                                     </strong><a href=https://github.com/dinvincible98/Jackal_ROS_Noetic_Bringup></a>
+                                    </strong>
+                                    </strong><a href=https://github.com/dinvincible98/3D_Optical_Flow></a>
                                     </strong>
                                 <li>Date:
                                     <strong>June 2019
