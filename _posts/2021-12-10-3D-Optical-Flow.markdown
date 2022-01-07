@@ -3,7 +3,7 @@ title: 3D optical flow
 subtitle: Computer Vision|Pointcloud Processing|Deep Learning
 subtext: A deep learning model that can perdict sub-pixel movement from 3d optical flow 
 layout: default
-modal-id: 9
+modal-id: 10
 date: 2021-12-10
 img: flow.gif
 thumbnail: flow.gif
